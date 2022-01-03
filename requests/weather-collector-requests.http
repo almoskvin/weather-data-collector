@@ -1,0 +1,219 @@
+POST http://localhost:8080/api/v1/weather/sensors
+Content-Type: application/json
+
+{
+  "sensorId": "4",
+  "country": "Russia",
+  "city": "Moscow"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
+
+###
+POST http://localhost:8080/api/v1/weather/sensors
+Content-Type: application/json
+
+{
+  "sensorId": "2"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
+
+###
+POST http://localhost:8080/api/v1/weather/sensors
+Content-Type: application/json
+
+{
+  "country": "Spain",
+  "city": "Madrid"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+});
+%}
+
+###
+PUT http://localhost:8080/api/v1/weather/sensors
+Content-Type: application/json
+
+{
+  "sensorId": "1",
+  "country": "France",
+  "city": "Lion"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
+
+###
+PUT http://localhost:8080/api/v1/weather/sensors
+Content-Type: application/json
+
+{
+  "sensorId": "100",
+  "country": "France",
+  "city": "Lion"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+});
+%}
+
+###
+GET http://localhost:8080/api/v1/weather/sensors/1
+Content-Type: application/json
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
+
+###
+POST http://localhost:8080/api/v1/weather/metrics
+Content-Type: application/json
+
+{
+  "sensorId": "1",
+  "temperature": "35",
+  "humidity": "55",
+  "windSpeed": "12",
+  "windDirection": "124",
+  "pressure": "1014"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
+
+###
+POST http://localhost:8080/api/v1/weather/metrics
+Content-Type: application/json
+
+{
+  "temperature": "15",
+  "humidity": "55",
+  "windSpeed": "10",
+  "windDirection": "172",
+  "pressure": "1014"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+});
+%}
+
+###
+POST http://localhost:8080/api/v1/weather/metrics
+Content-Type: application/json
+
+{
+  "sensorId": "1"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
+
+###
+POST http://localhost:8080/api/v1/weather/metrics/get
+Content-Type: application/json
+
+{
+  "sensors": [
+    1,
+    2
+  ],
+  "metrics": [
+    "TEMPERATURE",
+    "PRESSURE"
+  ],
+  "startDate": "2022-01-03T21:40:00",
+  "endDate": "2022-01-03T21:42:30"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
+
+###
+POST http://localhost:8080/api/v1/weather/metrics/get
+Content-Type: application/json
+
+{
+  "sensors": [
+    1,
+    2
+  ],
+  "metrics": [
+    "TEMPERATURE",
+    "PRESSURE"
+  ],
+  "endDate": "2022-01-03T21:42:30"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 400, "Response status is not 400");
+});
+%}
+
+###
+POST http://localhost:8080/api/v1/weather/metrics/get
+Content-Type: application/json
+
+{
+  "metrics": [
+    "TEMPERATURE",
+    "PRESSURE"
+  ],
+  "startDate": "2022-01-03T21:40:00",
+  "endDate": "2022-01-03T21:42:30"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
+
+###
+POST http://localhost:8080/api/v1/weather/metrics/get
+Content-Type: application/json
+
+{
+  "sensors": [
+    1,
+    3
+  ],
+  "startDate": "2022-01-03T21:40:00",
+  "endDate": "2022-01-03T21:42:30"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}

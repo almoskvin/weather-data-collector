@@ -1,0 +1,42 @@
+version: '2.4'
+
+services:
+  postgres-weather-collector:
+    container_name: weather-pgrs
+    image: postgres
+    environment:
+      POSTGRES_USER: weather
+      POSTGRES_PASSWORD: weather
+      PGDATA: /data/postgres
+    volumes:
+      - weather-pgrs:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - weather-collector-network
+    restart: unless-stopped
+  weather-data-collector:
+    image: weather-data-collector
+    container_name: weather-data-collector
+    build:
+      dockerfile: ./Dockerfile
+    volumes:
+      - ".:/webapp"
+    depends_on:
+        - postgres-weather-collector
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-weather-collector:5432/weather
+      - SPRING_DATASOURCE_USERNAME=weather
+      - SPRING_DATASOURCE_PASSWORD=weather
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8080:8080"
+    networks:
+      - weather-collector-network
+
+networks:
+  weather-collector-network:
+    driver: bridge
+
+volumes:
+  weather-pgrs:
