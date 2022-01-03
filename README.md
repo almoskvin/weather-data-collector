@@ -3,7 +3,7 @@ Dockerized Spring Boot microservice aimed to collect, store and share weather da
 
 Persistence layer represented by Postgres.
 
-Application build as REST API service using MVC pattern. Application runs on port 8080.
+Application is built as REST API service using MVC pattern. Application runs on port 8080.
 
 ## To do
 - Unit tests
