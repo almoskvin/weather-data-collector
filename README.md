@@ -14,6 +14,7 @@ Application is built as REST API service using MVC pattern. Application runs on 
 
 #### Register new sensor
 `POST /api/v1/weather/sensors`
+
 **Payload**
 ```json
 {
@@ -23,12 +24,14 @@ Application is built as REST API service using MVC pattern. Application runs on 
 }
 ```
 `sensorId` required, others are optional.
+
 **Response**
-Success: 200 OK
-Validation Failure: 400 + error message
+- Success: 200 OK
+- Validation Failure: 400 + error message
 
 #### Update sensor
 `PUT /api/v1/weather/sensors`
+
 **Payload**
 ```json
 {
@@ -38,12 +41,14 @@ Validation Failure: 400 + error message
 }
 ```
 `sensorId` required, others are optional.
+
 **Response**
-Success: 200 OK
-Validation Failure: 400 + error message
+- Success: 200 OK
+- Validation Failure: 400 + error message
 
 #### Get sensor
 `GET /api/v1/weather/sensors/{sensorId}`
+
 **Response**
 ```json
 {
@@ -57,6 +62,7 @@ Validation Failure: 400 + error message
 
 ####
 `POST /"api/v1/weather/metrics`
+
 **Payload**
 ```json
 {
@@ -69,12 +75,14 @@ Validation Failure: 400 + error message
 }
 ```
 `sensorId` required, others are optional.
+
 **Response**
-Success: 200 OK
-Validation Failure: 400 + error message
+- Success: 200 OK
+- Validation Failure: 400 + error message
 
 ####
 `POST /"api/v1/weather/metrics/get`
+
 **Payload**
 ```json
 {
@@ -91,13 +99,16 @@ Validation Failure: 400 + error message
 }
 ```
 All parameters are optional.
-Note: if `endDate` is specified without `startDate`, request will return 400. 
+
+_Note_: if `endDate` is specified without `startDate`, request will return 400. 
 Empty `sensors` are considered as request to all sensors. 
 Empty `metrics` are considered as request to all metrics.
 Empty dates are considered as request to the latest single record for specified sensor.
 
 Response consists of average data for each requested metric.
+
 **Response**
+- Success: 200 OK
 ```json
 {
   "metrics": {
@@ -109,7 +120,7 @@ Response consists of average data for each requested metric.
   }
 }
 ```
-Validation Failure: 400 + error message
+- Validation Failure: 400 + error message
 
 ## Build and run
 
