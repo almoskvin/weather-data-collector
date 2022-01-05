@@ -44,7 +44,6 @@ public class WeatherService {
         if (sensor == null) {
             return OperationResult.error("Sensor not found");
         }
-        sensor.setSensorId(sensorId);
         sensor.setCountry(country);
         sensor.setCity(city);
         sensorRepository.save(sensor);
@@ -80,7 +79,7 @@ public class WeatherService {
                 .pressure(pressure)
                 .build();
         metricsRepository.save(metrics);
-        return OperationResult.ok(metrics.getId());
+        return OperationResult.ok(metrics.getSensor().getSensorId());
     }
 
     public OperationResult<HashMap<String, Double>> getMetrics(Set<Integer> sensors, Set<String> metrics, LocalDateTime startDate,

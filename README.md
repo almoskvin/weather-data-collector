@@ -6,7 +6,7 @@ Persistence layer represented by Postgres.
 Application is built as REST API service using MVC pattern. Application runs on port 8080.
 
 ## To do
-- Unit tests
+- Contract testing (PDC)
 - Controller exception handler
 
 ## Endpoints
@@ -130,5 +130,5 @@ Response consists of average data for each requested metric.
 3) `docker-compose down` : completely stop the dockerized services
 
 ## Testing [WIP]
-Unit tests are to be written.
+Unit tests are in place.
 For development purposes, an Intellij HTTP requests file is available in the project at `requests/weather-collector-requests.http`
