@@ -12,9 +12,9 @@ Application is built as REST API service using MVC pattern. Application runs on 
 ## Build and run
 
 1) `mvn clean package` : build jar
-2) `docker-compose up --build -d` : build project docker image and containers and run containers.
+2) `docker compose up --build -d` : build project docker image and containers and run containers.
     `--build` required only for the first execution.
-3) `docker-compose down` : completely stop the dockerized services
+3) `docker compose down` : completely stop the dockerized services
 
 Application is configured to run on the port 8080. If the service is deployed locally, endpoints will be available at http://localhost:8080/
 
